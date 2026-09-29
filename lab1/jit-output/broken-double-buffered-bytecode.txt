@@ -1,0 +1,275 @@
+Compiled from "BrokenDoubleBufferedCollector.kt"
+public final class org.ldemetrios.collectors.BrokenDoubleBufferedCollector implements org.ldemetrios.api.MetricsCollector {
+  private final org.ldemetrios.collectors.StateBuffer global;
+
+  private volatile int active;
+
+  private final org.ldemetrios.TraversableThreadLocal<org.ldemetrios.collectors.BrokenDoubleBufferedCollector$ThreadState> buffers;
+
+  public org.ldemetrios.collectors.BrokenDoubleBufferedCollector();
+    Code:
+         0: aload_0
+         1: invokespecial #10                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #12                 // class org/ldemetrios/collectors/StateBuffer
+         8: dup
+         9: aconst_null
+        10: lconst_0
+        11: lconst_0
+        12: lconst_0
+        13: lconst_0
+        14: bipush        31
+        16: aconst_null
+        17: invokespecial #15                 // Method org/ldemetrios/collectors/StateBuffer."<init>":([JJJJJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+        20: putfield      #19                 // Field global:Lorg/ldemetrios/collectors/StateBuffer;
+        23: aload_0
+        24: new           #21                 // class org/ldemetrios/TraversableThreadLocal
+        27: dup
+        28: invokedynamic #40,  0             // InvokeDynamic #0:invoke:()Lkotlin/jvm/functions/Function0;
+        33: invokespecial #43                 // Method org/ldemetrios/TraversableThreadLocal."<init>":(Lkotlin/jvm/functions/Function0;)V
+        36: putfield      #47                 // Field buffers:Lorg/ldemetrios/TraversableThreadLocal;
+        39: return
+
+  public void record(long);
+    Code:
+         0: aload_0
+         1: getfield      #47                 // Field buffers:Lorg/ldemetrios/TraversableThreadLocal;
+         4: invokevirtual #54                 // Method org/ldemetrios/TraversableThreadLocal.obtain:()Ljava/lang/Object;
+         7: checkcast     #56                 // class org/ldemetrios/collectors/BrokenDoubleBufferedCollector$ThreadState
+        10: astore_3
+        11: aload_0
+        12: getfield      #60                 // Field active:I
+        15: istore        4
+        17: aload_3
+        18: invokevirtual #64                 // Method org/ldemetrios/collectors/BrokenDoubleBufferedCollector$ThreadState.getInside:()Ljava/util/concurrent/atomic/AtomicInteger;
+        21: iload         4
+        23: invokevirtual #70                 // Method java/util/concurrent/atomic/AtomicInteger.set:(I)V
+        26: aload_3
+        27: invokevirtual #74                 // Method org/ldemetrios/collectors/BrokenDoubleBufferedCollector$ThreadState.getBuffers:()[Lorg/ldemetrios/collectors/StateBuffer;
+        30: iload         4
+        32: aaload
+        33: astore        5
+        35: aload         5
+        37: invokevirtual #78                 // Method org/ldemetrios/collectors/StateBuffer.getBuckets:()[J
+        40: astore        6
+        42: lload_1
+        43: invokestatic  #84                 // Method org/ldemetrios/UtilsKt.bucket:(J)I
+        46: istore        7
+        48: aload         6
+        50: iload         7
+        52: laload
+        53: lstore        8
+        55: aload         6
+        57: iload         7
+        59: lload         8
+        61: lconst_1
+        62: ladd
+        63: lastore
+        64: aload         5
+        66: invokevirtual #88                 // Method org/ldemetrios/collectors/StateBuffer.getCount:()J
+        69: lstore        10
+        71: aload         5
+        73: lload         10
+        75: lconst_1
+        76: ladd
+        77: invokevirtual #91                 // Method org/ldemetrios/collectors/StateBuffer.setCount:(J)V
+        80: aload         5
+        82: aload         5
+        84: invokevirtual #94                 // Method org/ldemetrios/collectors/StateBuffer.getSum:()J
+        87: lload_1
+        88: ladd
+        89: invokevirtual #97                 // Method org/ldemetrios/collectors/StateBuffer.setSum:(J)V
+        92: lload_1
+        93: aload         5
+        95: invokevirtual #100                // Method org/ldemetrios/collectors/StateBuffer.getMin:()J
+        98: lcmp
+        99: ifge          108
+       102: aload         5
+       104: lload_1
+       105: invokevirtual #103                // Method org/ldemetrios/collectors/StateBuffer.setMin:(J)V
+       108: lload_1
+       109: aload         5
+       111: invokevirtual #106                // Method org/ldemetrios/collectors/StateBuffer.getMax:()J
+       114: lcmp
+       115: ifle          124
+       118: aload         5
+       120: lload_1
+       121: invokevirtual #109                // Method org/ldemetrios/collectors/StateBuffer.setMax:(J)V
+       124: aload_3
+       125: invokevirtual #64                 // Method org/ldemetrios/collectors/BrokenDoubleBufferedCollector$ThreadState.getInside:()Ljava/util/concurrent/atomic/AtomicInteger;
+       128: iconst_m1
+       129: invokevirtual #112                // Method java/util/concurrent/atomic/AtomicInteger.setRelease:(I)V
+       132: return
+
+  public org.ldemetrios.api.Snapshot snapshot();
+    Code:
+         0: aload_0
+         1: getfield      #47                 // Field buffers:Lorg/ldemetrios/TraversableThreadLocal;
+         4: astore_1
+         5: iconst_0
+         6: istore_2
+         7: aload_1
+         8: invokevirtual #126                // Method org/ldemetrios/TraversableThreadLocal.getSnapLock:()Ljava/lang/Object;
+        11: astore_3
+        12: aload_3
+        13: monitorenter
+        14: nop
+        15: iconst_0
+        16: istore        4
+        18: iconst_0
+        19: istore        5
+        21: aload_0
+        22: getfield      #60                 // Field active:I
+        25: istore        6
+        27: aload_0
+        28: iconst_1
+        29: iload         6
+        31: isub
+        32: putfield      #60                 // Field active:I
+        35: aload_0
+        36: getfield      #47                 // Field buffers:Lorg/ldemetrios/TraversableThreadLocal;
+        39: astore        7
+        41: iconst_0
+        42: istore        8
+        44: aload         7
+        46: invokevirtual #126                // Method org/ldemetrios/TraversableThreadLocal.getSnapLock:()Ljava/lang/Object;
+        49: astore        9
+        51: aload         9
+        53: monitorenter
+        54: nop
+        55: iconst_0
+        56: istore        10
+        58: aload         7
+        60: invokevirtual #130                // Method org/ldemetrios/TraversableThreadLocal.getSet:()Ljava/util/HashMap;
+        63: invokevirtual #136                // Method java/util/HashMap.keySet:()Ljava/util/Set;
+        66: dup
+        67: ldc           #138                // String <get-keys>(...)
+        69: invokestatic  #144                // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+        72: checkcast     #146                // class java/lang/Iterable
+        75: astore        11
+        77: iconst_0
+        78: istore        12
+        80: aload         11
+        82: invokeinterface #150,  1          // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+        87: astore        13
+        89: aload         13
+        91: invokeinterface #156,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        96: ifeq          156
+        99: aload         13
+       101: invokeinterface #159,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       106: astore        14
+       108: aload         14
+       110: checkcast     #161                // class org/ldemetrios/TraversableThreadLocal$Entry
+       113: astore        15
+       115: iconst_0
+       116: istore        16
+       118: aload         15
+       120: invokevirtual #164                // Method org/ldemetrios/TraversableThreadLocal$Entry.getValue:()Ljava/lang/Object;
+       123: checkcast     #56                 // class org/ldemetrios/collectors/BrokenDoubleBufferedCollector$ThreadState
+       126: astore        17
+       128: iconst_0
+       129: istore        18
+       131: aload         17
+       133: invokevirtual #64                 // Method org/ldemetrios/collectors/BrokenDoubleBufferedCollector$ThreadState.getInside:()Ljava/util/concurrent/atomic/AtomicInteger;
+       136: invokevirtual #168                // Method java/util/concurrent/atomic/AtomicInteger.get:()I
+       139: iload         6
+       141: if_icmpne     150
+       144: invokestatic  #173                // Method java/lang/Thread.onSpinWait:()V
+       147: goto          131
+       150: nop
+       151: nop
+       152: nop
+       153: goto          89
+       156: nop
+       157: nop
+       158: getstatic     #179                // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+       161: astore        10
+       163: aload         9
+       165: monitorexit
+       166: goto          177
+       169: astore        11
+       171: aload         9
+       173: monitorexit
+       174: aload         11
+       176: athrow
+       177: nop
+       178: aload_0
+       179: getfield      #47                 // Field buffers:Lorg/ldemetrios/TraversableThreadLocal;
+       182: astore        7
+       184: iconst_0
+       185: istore        8
+       187: aload         7
+       189: astore        9
+       191: iconst_0
+       192: istore        10
+       194: aload         9
+       196: invokevirtual #126                // Method org/ldemetrios/TraversableThreadLocal.getSnapLock:()Ljava/lang/Object;
+       199: astore        11
+       201: aload         11
+       203: monitorenter
+       204: nop
+       205: iconst_0
+       206: istore        12
+       208: aload         9
+       210: invokevirtual #130                // Method org/ldemetrios/TraversableThreadLocal.getSet:()Ljava/util/HashMap;
+       213: invokevirtual #136                // Method java/util/HashMap.keySet:()Ljava/util/Set;
+       216: new           #181                // class org/ldemetrios/collectors/BrokenDoubleBufferedCollector$snapshot$lambda$0$$inlined$traverse$1
+       219: dup
+       220: aload_0
+       221: iload         6
+       223: invokespecial #184                // Method org/ldemetrios/collectors/BrokenDoubleBufferedCollector$snapshot$lambda$0$$inlined$traverse$1."<init>":(Lorg/ldemetrios/collectors/BrokenDoubleBufferedCollector;I)V
+       226: checkcast     #186                // class kotlin/jvm/functions/Function1
+       229: astore        13
+       231: new           #188                // class org/ldemetrios/TraversableThreadLocal$sam$i$java_util_function_Predicate$0
+       234: dup
+       235: aload         13
+       237: invokespecial #191                // Method org/ldemetrios/TraversableThreadLocal$sam$i$java_util_function_Predicate$0."<init>":(Lkotlin/jvm/functions/Function1;)V
+       240: checkcast     #193                // class java/util/function/Predicate
+       243: invokeinterface #199,  2          // InterfaceMethod java/util/Set.removeIf:(Ljava/util/function/Predicate;)Z
+       248: nop
+       249: istore        12
+       251: aload         11
+       253: monitorexit
+       254: goto          265
+       257: astore        13
+       259: aload         11
+       261: monitorexit
+       262: aload         13
+       264: athrow
+       265: nop
+       266: nop
+       267: aload_0
+       268: getfield      #19                 // Field global:Lorg/ldemetrios/collectors/StateBuffer;
+       271: invokevirtual #202                // Method org/ldemetrios/collectors/StateBuffer.toSnapshot:()Lorg/ldemetrios/api/Snapshot;
+       274: astore        20
+       276: aload_3
+       277: monitorexit
+       278: aload         20
+       280: areturn
+       281: astore        19
+       283: aload_3
+       284: monitorexit
+       285: aload         19
+       287: athrow
+      Exception table:
+         from    to  target type
+            54   163   169   any
+           169   171   169   any
+           204   251   257   any
+           257   259   257   any
+            14   276   281   any
+           281   283   281   any
+
+  private static final org.ldemetrios.collectors.BrokenDoubleBufferedCollector$ThreadState buffers$lambda$0();
+    Code:
+         0: new           #56                 // class org/ldemetrios/collectors/BrokenDoubleBufferedCollector$ThreadState
+         3: dup
+         4: invokespecial #225                // Method org/ldemetrios/collectors/BrokenDoubleBufferedCollector$ThreadState."<init>":()V
+         7: areturn
+
+  public static final org.ldemetrios.collectors.StateBuffer access$getGlobal$p(org.ldemetrios.collectors.BrokenDoubleBufferedCollector);
+    Code:
+         0: aload_0
+         1: getfield      #19                 // Field global:Lorg/ldemetrios/collectors/StateBuffer;
+         4: areturn
+}
