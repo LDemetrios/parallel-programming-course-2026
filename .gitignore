@@ -1,0 +1,18 @@
+# Build directories
+build/
+out/
+cmake-build-*/
+
+# Compiled JVM classes and C/C++ object files
+*.class
+*.o
+*.obj
+*.dSYM/
+
+# Executables from the lab instructions
+/lab1/bench
+/lab1/bench_tsan
+/lab2/student-cpp/lab2
+/lab2/student-cpp/lab2_tsan
+/lab2/student-cpp/stress
+/lab2/student-cpp/ministress

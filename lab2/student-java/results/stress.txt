@@ -1,0 +1,50 @@
+Darwin i113861487 25.3.0 Darwin Kernel Version 25.3.0: Wed Jan 28 20:55:08 PST 2026; root:xnu-12377.91.3~2/RELEASE_ARM64_T6020 arm64
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+openjdk version "26.0.2" 2026-07-21
+OpenJDK Runtime Environment (build 26.0.2+10-55)
+OpenJDK 64-Bit Server VM (build 26.0.2+10-55, mixed mode, sharing)
+stress V1, window=none: 10000 runs, 2 overdrafts (0.02%)
+stress V1, window=none: 10000 runs, 4 overdrafts (0.04%)
+stress V1, window=none: 10000 runs, 4 overdrafts (0.04%)
+stress V1, window=yield: 10000 runs, 3967 overdrafts (39.67%)
+stress V1, window=yield: 10000 runs, 3846 overdrafts (38.46%)
+stress V1, window=yield: 10000 runs, 3865 overdrafts (38.65%)
+stress V2, window=none: 10000 runs, 0 overdrafts (0.00%)
+stress V2, window=none: 10000 runs, 0 overdrafts (0.00%)
+stress V2, window=none: 10000 runs, 0 overdrafts (0.00%)
+plain 2000 10000
+mode=plain samples=20,000,000
+  (0,0)          1,055    0.005%  forbidden under seq_cst
+  (0,1)      9,761,073   48.805%
+  (1,0)     10,237,862   51.189%
+  (1,1)             10    0.000%
+acqrel 2000 10000
+mode=acqrel samples=20,000,000
+  (0,0)            437    0.002%  forbidden under seq_cst
+  (0,1)      9,967,580   49.838%
+  (1,0)     10,031,502   50.158%
+  (1,1)            481    0.002%
+volatile 2000 10000
+mode=volatile samples=20,000,000
+  (0,0)              0    0.000%  forbidden under seq_cst
+  (0,1)     10,361,317   51.807%
+  (1,0)      9,605,828   48.029%
+  (1,1)         32,855    0.164%
+naive 200000 1
+mode=naive samples=200,000
+  (0,0)              5    0.003%  forbidden under seq_cst
+  (0,1)        100,767   50.384%
+  (1,0)         99,228   49.614%
+  (1,1)              0    0.000%
+acqrel 200000 100
+mode=acqrel samples=20,000,000
+  (0,0)             84    0.000%  forbidden under seq_cst
+  (0,1)      9,874,983   49.375%
+  (1,0)     10,124,692   50.623%
+  (1,1)            241    0.001%
+acqrel 200 100000
+mode=acqrel samples=20,000,000
+  (0,0)             14    0.000%  forbidden under seq_cst
+  (0,1)     10,687,904   53.440%
+  (1,0)      9,312,041   46.560%
+  (1,1)             41    0.000%

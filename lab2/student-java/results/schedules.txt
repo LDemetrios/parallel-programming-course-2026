@@ -1,0 +1,56 @@
+withdraw-v1 randoms 1000
+random: 1000 seeds, 501 fail (50.1%)
+first failing seed 0: BBAABBAA -> OVERDRAFT balance=-100 results=true,true
+replay BBAABBAA: same failure 10/10
+withdraw-v1 dfs
+explored 6 schedules, 4 fail  (0.01 s)
+first failing: AABBAABB -> OVERDRAFT balance=-100 results=true,true
+withdraw-v2 dfs
+explored 2 schedules, 0 fail  (0.01 s)
+withdraw-v0 dfs
+explored 20 schedules, 18 fail  (0.02 s)
+first failing: AABABB -> OVERDRAFT balance=-100 results=true,true
+transfer dfs
+explored 6 schedules, 2 fail  (0.01 s)
+first failing: AB -> DEADLOCK held={a:A, b:B}
+withdraw-v1 bounded 0
+explored 2 schedules, 0 fail  (0.01 s)
+withdraw-v1 bounded 1
+explored 4 schedules, 2 fail  (0.01 s)
+first failing: AABBBBAA -> OVERDRAFT balance=-100 results=true,true
+withdraw-v1 bounded 2
+explored 6 schedules, 4 fail  (0.01 s)
+first failing: AABBAABB -> OVERDRAFT balance=-100 results=true,true
+transfer bounded 0
+explored 2 schedules, 0 fail  (0.01 s)
+transfer bounded 1
+explored 6 schedules, 2 fail  (0.01 s)
+first failing: AB -> DEADLOCK held={a:A, b:B}
+collector-nostep3-1x1 dfs
+explored 106 schedules, 12 fail  (0.04 s)
+first failing: ABBBAABAAB -> LOST 1 record(s): counted 0 of 1
+collector-nostep3-1x2 dfs
+explored 1666 schedules, 105 fail  (0.37 s)
+first failing: AAAAAABBBAABAAB -> LOST 1 record(s): counted 1 of 2
+collector-nostep3-1x3 dfs
+explored 9931 schedules, 348 fail  (2.77 s)
+first failing: AAAAAAAAAAABBBAABAAB -> LOST 1 record(s): counted 2 of 3
+collector-nostep3-1x4 dfs
+explored 37151 schedules, 816 fail  (13.55 s)
+first failing: AAAAAAAAAAAAAAAABBBAABAAB -> LOST 1 record(s): counted 3 of 4
+collector-nostep3-2x1 bounded 0
+explored 6 schedules, 0 fail  (0.01 s)
+collector-nostep3-2x1 bounded 1
+explored 102 schedules, 0 fail  (0.05 s)
+collector-nostep3-2x1 bounded 2
+explored 945 schedules, 10 fail  (0.30 s)
+first failing: AAAAABCCCCCCCBBBBC -> LOST 1 record(s): counted 1 of 2
+collector-nostep3-2x1 bounded 3
+explored 5814 schedules, 108 fail  (1.63 s)
+first failing: AAAAABCCCCCCCBBBBC -> LOST 1 record(s): counted 1 of 2
+collector-plain-1x1 dfs
+explored 29 schedules, 0 fail  (0.02 s)
+collector-acqrel-1x1 dfs
+explored 636 schedules, 0 fail  (0.17 s)
+collector-ok-1x1 dfs
+explored 636 schedules, 0 fail  (0.16 s)
